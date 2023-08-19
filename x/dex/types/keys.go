@@ -1,5 +1,7 @@
 package types
 
+import "fmt"
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "dex"
@@ -20,11 +22,13 @@ const (
 	PortID = "dex"
 )
 
-var (
-	// PortKey defines the key to store the port ID in store
-	PortKey = KeyPrefix("dex-port-")
-)
+// PortKey defines the key to store the port ID in store
+var PortKey = KeyPrefix("dex-port-")
 
 func KeyPrefix(p string) []byte {
 	return []byte(p)
+}
+
+func OrderBookIndex(portID string, channelID string, sourceDenom string, targetDenom string) string {
+	return fmt.Sprintf("%s-%s-%s-%s", portID, channelID, sourceDenom, targetDenom)
 }
